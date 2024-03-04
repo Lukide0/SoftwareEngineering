@@ -8,8 +8,18 @@ This section specifies the functional requirements.
 
 ### User requirements
 
-[*List of user requirements in a form of user stories*]
+As a teacher I want to be able to send a request to create a subject.
+As a teacher I want to be able to set subject info.
+As a teacher I want to be able to activate a subject.
+As a teacher I want to be able to set co/pre-requisites.
+As a teacher I want to be able to set the teachers for a subject.
 
+As a SDO I want to be able to activate/deactivate a subject.
+As a SDO I want to be able to accept a subject creation request.
+As a SDO I want to be able to add a subject to a study programme.
+
+
+As a student I want to be able to view subject info.
 ### System requirements
 
 #### Actors
