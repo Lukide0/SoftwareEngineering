@@ -104,6 +104,9 @@ Students interact with the system to view subject info.
 
 [*Add an activity diagram for one use case per a team member*]
 
+
+
+
 ## Information model
 
 [*Express the information model of the domain as a UML class diagram in PlantUML. Do not use class methods in the diagram, only classes, class attributes and associations connecting classes.*]
