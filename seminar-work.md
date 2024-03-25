@@ -15,10 +15,12 @@ This section specifies the functional requirements.
 - As a teacher, I want to be able to set the teachers for a subject because it allows me to designate qualified instructors who can effectively deliver the subject material and provide guidance to students.
 - As a teacher, I want to be able to submit a request to modify important information about the subject (instructor, credits, prerequisites, co-requisites, etc.) so that any necessary updates or changes can be accurately reflected in the system.
 - As a teacher I want to be able to edit non-essential information about the subject (annotations, requirements for credit, literature, syllabus, etc.) without submitting a request, ensuring flexibility and efficiency in managing the subject details.
+
 - As a SDO, I want to be able to activate/deactivate a subject because it enables me to control the availability of subjects within the curriculum, aligning with academic policies and ensuring efficient resource allocation.
 - As a SDO, I want to be able to accept a subject creation request t because it allows me to review and approve proposals for new subjects, ensuring alignment with educational objectives and curricular standards.
 - As a SDO, I want to be able to add a subject to a study programme because it enables me to incorporate approved subjects into the curriculum of specific study programs, ensuring that students have access to a structured and coherent course of study.
 - As a SDO, I want to be able to edit subjects directly to correct mistakes and make edits efficiently, without relying on teachers to file requests for changes.
+
 - As a student, I want to be able to view subject info because it provides me with essential details about subjects, such as course content, prerequisites, and instructors, helping me make informed decisions about my academic path and course selections.
 
 ### System requirements
@@ -50,7 +52,7 @@ actor Student as "Student"
 
 rectangle "Subject Management" {
   usecase "Send request to create subject" as UC1
-  usecase "Set subject info" as UC2
+  usecase "Edit essential subject info" as UC2
   usecase "Activate subject" as UC3
   usecase "Set co/pre-requisites" as UC4
   usecase "Set teachers for subject" as UC5
@@ -76,7 +78,6 @@ rectangle "Subject Management" {
   Teacher --> UC3
   Teacher --> UC4
   Teacher --> UC5
-  Teacher --> UC6
   Teacher --> UC7
 
   Student --> UC13
@@ -84,11 +85,9 @@ rectangle "Subject Management" {
   UC4 ..> UC6 : <<include>>
   UC2 ..> UC6 : <<include>>
   UC3 ..> UC6 : <<include>>
-  UC6 ..> UC14 : <<include>>
+  UC5 ..> UC6 : <<include>>
   UC14 ..> UC8 : <<include>>
   UC12 ..> UC8 : <<include>>
-  UC1 ..> UC10 : <<include>>
-  UC11 ..> UC10 : <<extend>>
   UC7 ..> UC8 : <<include>>
 }
 @enduml
