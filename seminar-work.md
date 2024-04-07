@@ -194,6 +194,26 @@ stop
 - Subject information is updated, the SDO is notified about the successful completion.
 - Non-valid subject information is rejected and the SDO is notified about the error and decide what they want to do the next.
 
+##### Use Case: Set co/pre-requisites
+###### Starting situation (Initial assumption)
+- The teacher must be able to log in to the system 
+- The teacher has to be authorized to set co/pre-requisites for the specific subject.
+- The subject must already exist in the system.
+###### Normal
+1. The teacher logs into their account.
+2. The teacher navigates to the subject for which they want to set co/prerequisites.
+3. The system displays the current co/prerequisites for the chosen subject.
+4. The teacher adds/modifies the subject's co/prerequisites from a list of available subjects.
+5.  The teacher submits the changes.
+6.  The system checks if selected subjects are valid co/prerequisites.
+8.  The system updates the subject's co/prerequisites.
+9.  The system notifies the teacher that the co/prerequisites have been successfully set.
+###### What can go wrong
+- If the teacher selects a subject that cannot logically be set as a co/prerequisite, the system displays an error message and the teacher will decide if they want to choose a different subject as a co/prerequisite.
+###### System state on completion
+- The subject's co/prerequisites are set in the system and the teacher is notified about the successful completion.
+- Students are informed of the updated requirements.
+- Non-valid subject's co/prerequisite is rejected and the teacher is notified about the error.
 
 
 ## Information model
