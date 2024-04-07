@@ -126,8 +126,6 @@ Students interact with the system to view subject info.
 - Non-valid subject information is rejected and the teacher is notified about the error and decide what they want to do the next.
 
 ```plantuml
-Edit non_essential sunject __activity diagram
-Edit non_essential sunject __activity diagram
 @startuml
 |Teacher|
 start
