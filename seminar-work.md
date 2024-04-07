@@ -175,7 +175,7 @@ stop
 - Non-approved subject information is rejected and the teacher is notified about the error and decide what they want to do the next.
 - Non-valid information is rejected and the SDO will decide what to do the next. The SDO can send error message to the teacher and let them decide what do to like with non-approved information or the SDO can try to fix error.
 
-##### Use Case: Edit non-essential subject info
+##### Use Case: Edit subject
 ###### Starting situation (Initial assumption)
 - The SDO must be able to log in to the system 
 - The SDO has to be authorized to edit subject information.
