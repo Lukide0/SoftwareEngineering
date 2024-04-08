@@ -56,7 +56,7 @@ rectangle "Subject Management" {
   usecase "Activate subject" as UC3
   usecase "Set co/pre-requisites" as UC4
   usecase "Set teachers for subject" as UC5
-  usecase "Submit request to modify subject info" as UC6
+  usecase "Send request to modify subject info" as UC6
   usecase "Edit non-essential subject info" as UC7
   usecase "Update subject info" as UC8
   usecase "Activate/deactivate subject" as UC9
@@ -98,31 +98,157 @@ The Teacher actor interacts with various use cases such as sending requests to c
 The SDO actor is responsible for tasks like activating/deactivating subjects, accepting subject creation requests, adding subjects to study programs, and editing subjects.
 Students interact with the system to view subject info.
 
-###### [*Use case title*]
+###### Send request to create subject
+This use case describes a process, by which the teacher can send a request to the study department office for creation of a new subject.
 
-[*Use case description in the structure from the lecture.*]
+**Actors**
+- Teacher
+- SDO
 
-[*Add an activity diagram for one use case per a team member*]
+**Precondition**
+The teachers has logged in into their SIS account and have opened the form for creating a new subject.
+
+**Normal**
+1. The teacher fills out the subject creation form by setting all of the required fields in the subject creation form (also by setting some optional fields).
+2. The teacher submits the subject creation form.
+3. SIS verifies if the field values of the submitted form are valid (possible number of credits, examination type, supported languages, etc.)
+4. SIS stores the form and sends the SDO a notification in regards to the new subject creation form
+5. SIS notifies the teacher of a successful submission
+
+**What can go wrong**
+
+**System state on completion**
+- A new valid subject creation request is recorded and available for an SDO officer to accept
+- An invalid subject creation request is rejected and the teacher is notified of that fact.
+
+```plantuml
+@startuml
+|#lightblue|Teacher|
+start
+:The teacher fills out the subject creation form;
+:The teacher submits the subject creation form;
+|#lightgray|SIS|
+    if (Verify data) then (valid data)
+        :The system stores the subject creation form;
+        :The system notifies the SDO of a new subject creation form;
+        :The system notifies the teacher of success;
+        stop
+    else (invalid data)
+        :The system notifies the teacher of a failure;
+        stop;
+    endif
+@enduml
+```
 
 
+
+
+###### Send request to modify subject info
+This use case describes a process, by which the teacher can send a request to the study department office for modification of essential subject info.
+
+**Actors**
+- Teacher
+- SDO
+
+
+**Precondition**
+The teachers has logged in into their SIS account and have opened the form for modifying essential subject info.
+
+**Normal**
+
+
+**What can go wrong**
+- The modification form contains some invalid values and the system notifies the teacher of a failed form submission.
+
+**System state on completion**
+- A new valid subject modification request is recorded and available for an SDO officer to accept, while notifying both the teacher and the SDO of the fact.
+- An invalid subject modification request is rejected and the teacher is notified of that fact.
+
+***
+###### Activate/deactivate a subject
+This use case describes a process, by which the SDO can activate/deactivate a subject.
+
+**Actors**
+- SDO
+
+
+**Precondition**
+The SDO has logged in to their SIS account and has opened the form for activating/deactivating a subject.
+
+
+**Normal**
+1. The SDO selects a subject by its shortcode and is provided with the option of activating/deactivating the subject.
+2. The SDO clicks on the activate/deactivate subject button.
+3. The application displays a verification window, to warn the SDO if they truly want to go proceed with the operation.
+4. The SDO confirms the operation.
+5. SIS verifies that the operation can be done, does it and notifies the SDO of it. 
+
+
+**What can go wrong**
+- The subject activation/deactivation cannot be done(for example due to the subject being taught at the moment) and the SDO is notified of that.
+
+**System state on completion**
+- The subject is activated/deactivated and the SDO is notified of that.
+- The subject activation/deactivation wasn't able to proceed and the SDO is notified of that.
 
 
 ## Information model
 
-[*Express the information model of the domain as a UML class diagram in PlantUML. Do not use class methods in the diagram, only classes, class attributes and associations connecting classes.*]
-
 ```plantuml
 @startuml
-class Car
+class Visitor
 
-Driver - Car : drives >
-Car *- Wheel : have 4 >
-Car -- Person : < owns
+class Person {
+name
+email
+phone
+}
+
+class Student
+class Teacher {
+faculty
+department
+}
+class SDO
+
+class Subject {
+name
+shortcode
+description
+credits
+hours
+examination type
+
+}
+class StudyProgramme
+
+Person <|-- Student
+Person <|-- Teacher
+Person <|-- SDO
+
+
+Subject "0..n" <-- Subject : has prerequisites
+Subject "0..n" <-- Subject : has corequisites
+Subject "0..n" -- "0..n" StudyProgramme : " has subject"
+Teacher -- Subject : guarantees
+Teacher -- Subject : teaches
 @enduml
 ```
 
-[*Document each class with in a separate subsection*]
+### Visitor
+Non-logged in visitor to the website.
 
-### [*Class name*]
+### Person
+A natural person with personal information like name, email, phone etc.
 
-[*Class description consisting of its definition, description of its essential properties (attribues and associations).*]
+### Student
+A person studying at the university.
+
+### Teacher
+A person teaching at the university.
+
+### SDO
+A person working as a study department officer at the university.
+
+### Subject
+An area of knowledge or study being taught at the university.
