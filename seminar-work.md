@@ -215,6 +215,95 @@ stop
 - Students are informed of the updated requirements.
 - Non-valid subject's co/prerequisite is rejected and the teacher is notified about the error.
 
+#### Use Case Description: View Subject Info
+
+**Title:** View Subject Info
+
+**Primary Actors:** Student, Teacher, SDO
+
+**Goal:** To allow users to view detailed information about a specific subject.
+
+**Preconditions:**
+
+- The user is logged into the system.
+- The system contains up-to-date information on subjects.
+
+**Main Flow:**
+
+1. **User Login:** The user logs into the system and is authenticated.
+2. **Navigate to Subjects Overview:** The user navigates to the "Subjects Overview" section or tab within the system interface.
+3. **Display Subject Search Interface:** The system displays the "Subject Search" interface, which includes a search bar and possibly filters for criteria such as name, code, semester, faculty, department, or the names of teachers associated with subjects.
+4. **Enter Search Criteria:** The user inputs search criteria into the search bar, which can include the subject name, code, semester, faculty, department, or teacher's name.
+5. **Submit Search:** The user submits the search query.
+6. **Display Search Results:** The system processes the search query and displays a list of subjects matching the search criteria. If no subjects are found, the system displays a "No subjects found" message.
+7. **Select Subject:** The user selects a subject from the list to view more information.
+8. **Retrieve and Display Subject Info:** The system retrieves detailed information about the selected subject from the database and displays it. This information includes the subject name, description, credit hours, semester, faculty, department, list of teachers, and schedule.
+
+**Postconditions:**
+
+- The user has accessed detailed information about the chosen subject.
+
+**Alternative Flows:**
+
+- **No Search Results:** If no subjects match the search criteria, the system displays a message indicating that no subjects were found. The user can adjust their search criteria and try again.
+
+```plantuml
+@startuml
+start
+:User logs into the system;
+partition User {
+    :Navigate to the Subjects Overview section;
+}
+partition System {
+    :Display Subjects Dashboard with search functionality;
+}
+partition User {
+    :Search for subjects by name, code, semester, faculty, department, or teacher;
+}
+partition System {
+    if (Subjects found based on criteria) then (yes)
+        :Display list of subjects matching search criteria;
+    else (no)
+        :Display message "No subjects found matching criteria";
+    endif
+}
+partition User {
+    :Select a subject from the list;
+}
+partition System {
+    :Retrieve detailed info for selected subject;
+    :Display subject info including name, code, semester, faculty, department, assigned teachers, and description;
+}
+stop
+@enduml
+```
+
+#### Use Case Description: Set Teachers for Subject
+
+**Title:** Set Teachers for Subject
+
+**Actor:** SDO
+
+**Preconditions:**
+
+- The SDO must be logged into the system with sufficient privileges.
+- The subject and teacher information must be available in the system database.
+
+**Main Flow:**
+
+1. The SDO navigates to the subject management page.
+2. The SDO selects the subject for which they want to assign teachers.
+3. The system presents a list of available teachers.
+4. The SDO selects one or more teachers to assign to the subject and confirms the selection.
+5. The system updates the subject information with the assigned teacher(s) and displays a confirmation message.
+
+**Postconditions:**
+
+- The selected teacher(s) are assigned to the subject, and this information is updated in the system.
+
+**Alternative Flows:**
+
+- No Teachers Available: If there are no available teachers to assign, the system displays a message indicating this.
 
 ## Information model
 
