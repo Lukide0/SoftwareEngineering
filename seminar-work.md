@@ -108,6 +108,7 @@ This use case describes a process, by which the teacher can send a request to th
 **Precondition**
 The teachers has logged in into their SIS account and have opened the form for creating a new subject.
 
+
 **Normal**
 1. The teacher fills out the subject creation form by setting all of the required fields in the subject creation form (also by setting some optional fields).
 2. The teacher submits the subject creation form.
@@ -137,6 +138,76 @@ start
         :The system notifies the teacher of a failure;
         stop;
     endif
+@enduml
+```
+
+#### Use Case: Edit essential subject info
+###### Starting situation (Initial assumption)
+- The teacher must be able to log in to the system
+-  The teacher has to be authorized to edit essential subject information.
+-  The subject must already exist in the system.
+###### Normal
+1. The teacher logs into their account.
+2. The teacher navigates to subject they wish to edit essential subject info.
+3. The system displays current subject information.
+4. The teacher navigates to the edit non-essential info
+5. The teacher modifies the fields they wish to change, such as the subject's name, code, credits, timetable, teachers ...
+6.  The teacher submits the changes.
+7. The SDO approves the changes.
+8.  The system checks if updated information about subject is valid.
+9.  The system updates the subject information in the database.
+10.  The system notifies the SDO and the teacher that the update was successful.
+###### What can go wrong
+- If the SDO does not approve change that the teacher did, the error message is sent to the teacher and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
+- If edited subject info is invalid, the system displays an error message and the SDO will decide if they want to fix error or to send error message to the teacher.
+###### System state on completion
+- Subject information are updated, the SDO and the teacher is notified about the successful completion.
+- Non-approved subject information is rejected and the teacher is notified about the error and decide what they want to do the next.
+- Non-valid information is rejected and the SDO will decide what to do the next. The SDO can send error message to the teacher and let them decide what do to like with non-approved information or the SDO can try to fix error.
+
+##### Use Case: Edit non-essential subject info
+###### Starting situation (Initial assumption)
+- The teacher must be able to log in to the system
+-  The teacher has to be authorized to edit non-essential subject information.
+-  The subject must already exist in the system.
+###### Normal
+1. The teacher logs into their account.
+2. The teacher navigates to subject they wish to edit non-essential subject info.
+3. The system displays current subject information.
+4. The teacher navigates to the edit essential info
+5. The teacher modifies the fields they wish to change, such as the subject's description ...
+6.  The teacher submits the changes.
+7.  The system checks if updated information about subject is valid.
+8.  The system updates the subject information in the database.
+9.  The system notifies the teacher that the update was successful.
+###### What can go wrong
+- If the teacher enters invalid information, the system displays an error message and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
+###### System state on completion
+- Subject information are updated, the teacher is notified about the successful completion.
+- Non-valid subject information is rejected and the teacher is notified about the error and decide what they want todo the next.
+
+```plantuml
+@startuml
+start
+:The teacher logs into her/his account;
+:The teacher navigates to subject to edit;
+:The sysytem displays current subject info;
+:The teacher navigates to the edit non-essential info;
+repeat
+    :The teacher modifies non-essential subject info;
+    :The teacher submits changes;
+    :The system checks updated info;
+    if (Verify data) then (valid data)
+        :The system updates subject info in a database;
+        :The system notifies the teacher of success;
+        stop
+    else (invalid data)
+        :The sysytem displays error message;
+    endif
+repeat while (Try again to edit subject info?) is (yes)
+->no;
+:No changes;
+stop
 @enduml
 ```
 
