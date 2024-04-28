@@ -148,7 +148,7 @@ start
 
 ###### Starting situation (Initial assumption)
 
-- The teacher must be able to log in to the system
+- The teacher must be able to log in to the system.
 - The teacher has to be authorized to edit essential subject information.
 - The subject must already exist in the system.
 
@@ -157,30 +157,26 @@ start
 1. The teacher logs into their account.
 2. The teacher navigates to subject they wish to edit essential subject info.
 3. The system displays current subject information.
-4. The teacher navigates to the edit non-essential info
+4. The teacher navigates to the edit essential info.
 5. The teacher modifies the fields they wish to change, such as the subject's name, code, credits, timetable, teachers ...
-6. The teacher submits the changes.
-7. The SDO approves the changes.
-8. The system checks if updated information about subject is valid.
-9. The system updates the subject information in the database.
-10. The system notifies the SDO and the teacher that the update was successful.
+6. The teacher sends the request to modify subject info.
+7. The system checks if the updated information about subject is valid.
+10. The system notifies the teacher that the request was successfully sent.
 
 ###### What can go wrong
 
-- If the SDO does not approve change that the teacher did, the error message is sent to the teacher and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
-- If edited subject info is invalid, the system displays an error message and the SDO will decide if they want to fix error or to send error message to the teacher.
+- If edited subject info is invalid, the error message is sent to the teacher and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
 
 ###### System state on completion
 
-- Subject information are updated, the SDO and the teacher is notified about the successful completion.
-- Non-approved subject information is rejected and the teacher is notified about the error and decide what they want to do the next.
-- Non-valid information is rejected and the SDO will decide what to do the next. The SDO can send error message to the teacher and let them decide what do to like with non-approved information or the SDO can try to fix error.
+- The request to midify subject info is sent and the teacher is notified about the successful request.
+- Non-valid subject modification is rejected and the teacher is notified about the error and decide what they want to do the next.
 
 ##### Use Case: Edit non-essential subject info
 
 ###### Starting situation (Initial assumption)
 
-- The teacher must be able to log in to the system
+- The teacher must be able to log in to the system.
 - The teacher has to be authorized to edit non-essential subject information.
 - The subject must already exist in the system.
 
@@ -188,8 +184,8 @@ start
 
 1. The teacher logs into their account.
 2. The teacher navigates to subject they wish to edit non-essential subject info.
-3. The system displays current subject information.
-4. The teacher navigates to the edit essential info
+3. The system displays the current subject information.
+4. The teacher navigates to the edit non-essential info.
 5. The teacher modifies the fields they wish to change, such as the subject's description ...
 6. The teacher submits the changes.
 7. The system checks if updated information about subject is valid.
@@ -230,99 +226,11 @@ stop
 @enduml
 ```
 
-##### Use Case: Edit non-essential subject info
-
-###### Starting situation (Initial assumption)
-
-- The teacher must be able to log in to the system
-- The teacher has to be authorized to edit non-essential subject information.
-- The subject must already exist in the system.
-
-###### Normal
-
-1. The teacher logs into their account.
-2. The teacher navigates to subject they wish to edit non-essential subject info.
-3. The system displays current subject information.
-4. The teacher navigates to the edit essential info
-5. The teacher modifies the fields they wish to change, such as the subject's description ...
-6. The teacher submits the changes.
-7. The system checks if updated information about subject is valid.
-8. The system updates the subject information in the database.
-9. The system notifies the teacher that the update was successful.
-
-###### What can go wrong
-
-- If the teacher enters invalid information, the system displays an error message and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
-
-###### System state on completion
-
-- Subject information is updated, the teacher is notified about the successful completion.
-- Non-valid subject information is rejected and the teacher is notified about the error and decide what they want to do the next.
-
-```plantuml
-@startuml
-|Teacher|
-start
-:The teacher logs into her/his account;
-:The teacher navigates to subject to edit;
-:The system displays current subject info;
-:The teacher navigates to the edit non-essential info;
-repeat
-    :The teacher modifies non-essential subject info;
-    :The teacher submits changes;
-    |System|
-    if (Verify data) then (valid data)
-        :The system updates subject info in a database;
-        :The system notifies the teacher of success;
-        stop
-    else (invalid data)
-        :The system displays error message;
-    endif
-|Teacher|
-repeat while (Try again to edit subject info?) is (yes)
-->no;
-:No changes;
-stop
-@enduml
-```
-
-##### Use Case: Edit essential subject info
-
-###### Starting situation (Initial assumption)
-
-- The teacher must be able to log in to the system
-- The teacher has to be authorized to edit essential subject information.
-- The subject must already exist in the system.
-
-###### Normal
-
-1. The teacher logs into their account.
-2. The teacher navigates to subject they wish to edit essential subject info.
-3. The system displays current subject information.
-4. The teacher navigates to the edit non-essential info
-5. The teacher modifies the fields they wish to change, such as the subject's name, code, credits, timetable, teachers ...
-6. The teacher submits the changes.
-7. The SDO approves the changes.
-8. The system checks if updated information about subject is valid.
-9. The system updates the subject information in the database.
-10. The system notifies the SDO and the teacher that the update was successful.
-
-###### What can go wrong
-
-- If the SDO does not approve change that the teacher did, the error message is sent to the teacher and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
-- If edited subject info is invalid, the system displays an error message and the SDO will decide if they want to fix error or to send error message to the teacher.
-
-###### System state on completion
-
-- Subject information is updated, the SDO and the teacher is notified about the successful completion.
-- Non-approved subject information is rejected and the teacher is notified about the error and decide what they want to do the next.
-- Non-valid information is rejected and the SDO will decide what to do the next. The SDO can send error message to the teacher and let them decide what do to like with non-approved information or the SDO can try to fix error.
-
 ##### Use Case: Edit subject
 
 ###### Starting situation (Initial assumption)
 
-- The SDO must be able to log in to the system
+- The SDO must be able to log in to the system.
 - The SDO has to be authorized to edit subject information.
 - The subject must already exist in the system.
 
@@ -349,7 +257,7 @@ stop
 
 ###### Starting situation (Initial assumption)
 
-- The teacher must be able to log in to the system
+- The teacher must be able to log in to the system.
 - The teacher has to be authorized to set co/pre-requisites for the specific subject.
 - The subject must already exist in the system.
 
@@ -359,10 +267,10 @@ stop
 2. The teacher navigates to the subject for which they want to set co/prerequisites.
 3. The system displays the current co/prerequisites for the chosen subject.
 4. The teacher adds/modifies the subject's co/prerequisites from a list of available subjects.
-5. The teacher submits the changes.
+5. The teacher sends the request to modify subject`s co/prerequisites.
 6. The system checks if selected subjects are valid co/prerequisites.
 7. The system updates the subject's co/prerequisites.
-8. The system notifies the teacher that the co/prerequisites have been successfully set.
+8. The system notifies the teacher that the request was successfully sent.
 
 ###### What can go wrong
 
@@ -370,8 +278,7 @@ stop
 
 ###### System state on completion
 
-- The subject's co/prerequisites are set in the system and the teacher is notified about the successful completion.
-- Students are informed of the updated requirements.
+- The subject's co/prerequisites are set in the system and the teacher is notified about the successful submission of the request.
 - Non-valid subject's co/prerequisite is rejected and the teacher is notified about the error.
 
 ##### Use Case: Add subject to study programme
