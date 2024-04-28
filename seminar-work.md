@@ -573,6 +573,95 @@ The SDO has logged in to their SIS account and has opened the form for activatin
 - The subject is activated/deactivated and the SDO is notified of that.
 - The subject activation/deactivation wasn't able to proceed and the SDO is notified of that.
 
+#### Update subject info
+
+##### Starting situation (Initial assumption):
+
+- The respective subject is already created.
+- A teacher who wants to update the info must teach or guarantee this subject. - Within another Use case, there arises a need to update subject info.
+
+##### Normal interaction:
+
+1. The system receives the subject data that should be modified.
+2. The system updates the information.
+3. If there is a need to propagate these changes to another subjects (e.g. setting prerequisites), then their info is also modified.
+
+##### Alternative paths / What can go wrong:
+
+- If there arises a problem with prerequisite setting (e.g. a cycle is created), the operation should be canceled and the author should be notified via email.
+
+##### System state on completion:
+
+- The system contains the updated info.
+
+#### Accept subject creation request
+
+##### Starting situation (Initial assumption):
+
+- A teacher submits a subject creation request containing all the necessary information to the Study Department.
+
+##### Normal interaction:
+
+1. The SDO views the request.
+2. The SDO checks if the request is valid.
+3. The SDO approves the request.
+4. The subject is inserted into the system.
+5. The author of the request is notified of the result via email.
+
+##### Alternative paths / What can go wrong:
+
+- The SDO might not approve the request. In that case, the author is notified of the denial and the system remains unchanged.
+
+##### System state on completion:
+
+- The system contains the newly created subject.
+
+#### Accept subject info modification request
+
+##### Starting situation (Initial assumption):
+
+- A teacher fills in a form with modifications of one subject's information.
+- They submit the form as a request to the Study Department.
+- The subject must already exist (approved by the SD) and the teacher must guarantee or teach this subject.
+
+##### Normal interaction:
+
+1. A SDO views the modifications of the information.
+2. A SDO approves the modification request.
+3. A SDO assigns a subject code to the subject.
+4. The modifications are propagated to the system. (See the included Use case: "Update subject info").
+5. The teacher (author) is notified of the approvement via e-mail.
+
+##### Alternative paths / What can go wrong:
+
+- If the SDO declines the modifications, the subject info remains unchanged. The teacher (author) is notified of the denial. The request is archived.
+
+##### System state on completion:
+
+- The subject info is modified (if the request was approved).
+- The subject info remains unchanged (if the request was declined).
+
+```plantuml
+@startuml
+
+|SDO|
+start
+:Review the subject creation request;
+if (Is approved?) then (yes)
+  :Assign a subject code;
+|System|
+  :Update subject info;
+  :Enable teacher to edit info;
+  :Enable students to view subject detail;
+else (no)
+  :Archive the request;
+endif
+:Notify the author of the result via e-mail;
+stop
+
+@enduml
+```
+
 ## Information model
 
 ```plantuml
