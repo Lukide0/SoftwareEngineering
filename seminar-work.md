@@ -389,8 +389,6 @@ stop
 
 
 ***
-# Lukide
-
 
 #### Use Case: Add subject to study programme
 
@@ -454,7 +452,6 @@ stop
 
 
 ***
-# Bombonchik
 
 #### Use Case: View Subject Info
 
@@ -552,7 +549,6 @@ stop
 - The selected teacher(s) are assigned to the subject, and this information is updated in the system.
 
 
-# Nalim
 ***
 ##### Use Case: Accept subject info modification request
 
