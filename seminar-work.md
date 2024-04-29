@@ -289,7 +289,7 @@ The SDO has logged in to their SIS account and has opened the form for activatin
 - Non-valid subject information is rejected and the teacher is notified about the error and decide what they want todo the next.
 
 
-![edit non essential](img/edit-non-essential.png)
+![edit non essential](img/edit-non-essentials.png)
 ```plantuml
 @startuml
 start
