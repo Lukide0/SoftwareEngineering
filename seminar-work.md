@@ -551,15 +551,15 @@ stop
 
 
 ***
-##### Use Case: Accept subject info modification request
+#### Use Case: Accept subject info modification request
 
-###### Precondition
+##### Precondition
 
 - A teacher fills in a form with modifications of one subject's information.
 - They submit the form as a request to the Study Department.
 - The subject must already exist (approved by the SD) and the teacher must guarantee or teach this subject.
 
-###### Normal flow
+##### Normal flow
 
 1. A SDO views the modifications of the information.
 2. A SDO approves the modification request.
@@ -567,11 +567,11 @@ stop
 4. The modifications are propagated to the system. (See the included Use case: "Update subject info").
 5. The teacher (author) is notified of the approvement via e-mail.
 
-###### Alternative flows
+##### Alternative flows
 
 - If the SDO declines the modifications, the subject info remains unchanged. The teacher (author) is notified of the denial. The request is archived.
 
-###### System state on completion:
+##### System state on completion:
 
 - The subject info is modified (if the request was approved).
 - The subject info remains unchanged (if the request was declined).
@@ -621,11 +621,11 @@ stop
 4. The subject is inserted into the system.
 5. The author of the request is notified of the result via email.
 
-###### Alternative flows
+##### Alternative flows
 
 - The SDO might not approve the request. In that case, the author is notified of the denial and the system remains unchanged.
 
-###### System state on completion
+##### System state on completion
 
 - The system contains the newly created subject.
 
