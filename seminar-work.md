@@ -42,7 +42,7 @@ Individuals who are enrolled in a study programme.
 #### Use cases
 
 ##### Subject management
-
+![alt text](image-1.png)
 ```plantuml
 @startuml
 left to right direction
@@ -125,6 +125,7 @@ The teachers has logged in into their SIS account and have opened the form for c
 - A new valid subject creation request is recorded and available for an SDO officer to accept
 - An invalid subject creation request is rejected and the teacher is notified of that fact.
 
+![alt text](image-2.png)
 ```plantuml
 @startuml
 |#lightblue|Teacher|
@@ -201,6 +202,7 @@ start
 - Subject information are updated, the teacher is notified about the successful completion.
 - Non-valid subject information is rejected and the teacher is notified about the error and decide what they want todo the next.
 
+![alt text](image-3.png)
 ```plantuml
 @startuml
 start
@@ -310,6 +312,7 @@ stop
 - The subject is successfully added to the study programme, and the SDO is notified about the successful completion.
 - Non-valid subjects are rejected, and the SDO is notified about the error.
 
+![alt text](image-4.png)
 ```plantuml
 @startuml
 |SDO|
@@ -371,6 +374,7 @@ Student, Teacher, SDO
 
 - **No Search Results:** If no subjects match the search criteria, the system displays a message indicating that no subjects were found. The user can adjust their search criteria and try again.
 
+![alt text](image.png)
 ```plantuml
 @startuml
 start
@@ -548,6 +552,7 @@ The SDO has logged in to their SIS account and has opened the form for activatin
 - The subject info is modified (if the request was approved).
 - The subject info remains unchanged (if the request was declined).
 
+![alt text](image-5.png)
 ```plantuml
 @startuml
 
@@ -570,7 +575,7 @@ stop
 ```
 
 ## Information model
-
+![alt text](image-6.png)
 ```plantuml
 @startuml
 class Visitor
