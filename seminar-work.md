@@ -31,17 +31,23 @@ This section specifies the functional requirements.
 
 Faculty members responsible for initiating subject-related actions such as creating, modifying, and activating subjects, as well as assigning instructors and setting prerequisites.
 
-##### SDO (Student department)
+##### SDO (Study department officer)
 
 Administrative personnel tasked with managing subjects at a higher level, including activating/deactivating subjects, accepting subject creation requests, adding subjects to study programs, and editing subjects.
 
 ##### Student
 
 Individuals who are enrolled in a study programme.
-
+***
 #### Use cases
 
-##### Subject management
+##### Use case diagram
+![use case diagram](img/use-case-diagram.png)
+
+The use case diagram depicts the subject management system, involving three main actors: Teachers, Student Department Officers (SDO), and Students.  
+The Teacher actor interacts with various use cases such as sending requests to create subjects, setting subject info, activating subjects, submitting requests to modify subject info, and editing non-essential subject info.  
+The SDO actor is responsible for tasks like activating/deactivating subjects, accepting subject creation requests, adding subjects to study programs, and editing subjects.  
+Students interact with the system to view subject info.
 
 ```plantuml
 @startuml
@@ -93,24 +99,23 @@ rectangle "Subject Management" {
 @enduml
 ```
 
-The use case diagram depicts the subject management system, involving three main actors: Teachers, Student Department Officers (SDO), and Students.
-The Teacher actor interacts with various use cases such as sending requests to create subjects, setting subject info, activating subjects, submitting requests to modify subject info, and editing non-essential subject info.
-The SDO actor is responsible for tasks like activating/deactivating subjects, accepting subject creation requests, adding subjects to study programs, and editing subjects.
-Students interact with the system to view subject info.
+***
 
-##### Send request to create subject
+#### Use Case: Send request to create subject
 
-This use case describes a process, by which the teacher can send a request to the study department office for creation of a new subject.
+This use case describes a process, by which a teacher can send a request to the study department office for creation of a new subject.
 
-###### Actors
+##### Actors
 
 - Teacher
-- SDO
 
-###### Precondition
-The teachers has logged in into their SIS account and have opened the form for creating a new subject.
 
-###### Normal
+##### Precondition
+
+The teacher has logged in into their SIS account and have opened the form for creating a new subject.
+
+
+##### Normal flow
 
 1. The teacher fills out the subject creation form by setting all of the required fields in the subject creation form (also by setting some optional fields).
 2. The teacher submits the subject creation form.
@@ -118,12 +123,16 @@ The teachers has logged in into their SIS account and have opened the form for c
 4. SIS stores the form and sends the SDO a notification in regards to the new subject creation form
 5. SIS notifies the teacher of a successful submission
 
-###### What can go wrong
+
+###### Alternative flows
+- The form contains invalid information and is rejected with teacher being notified of that. 
+
 
 ###### System state on completion
-
 - A new valid subject creation request is recorded and available for an SDO officer to accept
 - An invalid subject creation request is rejected and the teacher is notified of that fact.
+
+![creation image](img/use-case-creation.png)
 
 ```plantuml
 @startuml
@@ -144,15 +153,80 @@ start
 @enduml
 ```
 
-##### Use Case: Edit essential subject info
+***
 
-###### Starting situation (Initial assumption)
+#### Send request to modify subject info
+
+This use case describes a process, by which the teacher can send a request to the study department office for modification of subject info.
+
+##### Actors
+
+- Teacher
+
+##### Precondition
+The teacher has logged in into their SIS account and have filled out all of the essential subject info that they want to change.
+
+##### Normal flow
+1. The teacher submits the subject modification form.
+3. SIS verifies if the field values of the submitted form are valid
+4. SIS stores the form and sends the SDO a notification in regards to the new subject modification request
+5. SIS notifies the teacher of a successful submission
+
+##### What can go wrong
+- The modification form contains some invalid values and the system notifies the teacher of a failed form submission.
+
+##### System state on completion
+- A new valid subject modification request is recorded and available for an SDO to accept, while notifying both the teacher and the SDO of the fact.
+- An invalid subject modification request is rejected and the teacher is notified of that fact.
+
+
+***
+
+#### Activate/deactivate a subject
+
+This use case describes a process, by which the SDO can activate/deactivate a subject.
+
+##### Actors
+- SDO
+
+##### Precondition
+The SDO has logged in to their SIS account and has opened the form for activating/deactivating a subject.
+
+##### Normal flow
+
+1. The SDO selects a subject by its shortcode and is provided with the option of activating/deactivating the subject.
+2. The SDO selects to activate/deactivate subject.
+3. The application displays a verification window, to warn the SDO if they truly want to go proceed with the operation.
+4. The SDO confirms the operation.
+5. SIS verifies that the operation can be done, does it and notifies the SDO of it.
+
+##### Alternative flows
+
+- The subject activation/deactivation cannot be done(for example due to the subject being taught at the moment) and the SDO is notified of that.
+
+##### System state on completion
+
+- The subject is activated/deactivated and the SDO is notified of that.
+- The subject activation/deactivation wasn't able to proceed and the SDO is notified of that.
+
+
+
+***
+
+
+#### Use Case: Edit essential subject info
+
+##### Actors
+- Teacher
+
+##### Precondition
 
 - The teacher must be able to log in to the system.
 - The teacher has to be authorized to edit essential subject information.
 - The subject must already exist in the system.
 
-###### Normal
+
+##### Normal flow
 
 1. The teacher logs into their account.
 2. The teacher navigates to subject they wish to edit essential subject info.
@@ -163,24 +237,36 @@ start
 7. The system checks if the updated information about subject is valid.
 10. The system notifies the teacher that the request was successfully sent.
 
-###### What can go wrong
+
+##### Alternative flows
 
 - If edited subject info is invalid, the error message is sent to the teacher and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
 
-###### System state on completion
+
+##### System state on completion
 
 - The request to midify subject info is sent and the teacher is notified about the successful request.
 - Non-valid subject modification is rejected and the teacher is notified about the error and decide what they want to do the next.
 
-##### Use Case: Edit non-essential subject info
 
-###### Starting situation (Initial assumption)
+
+***
+
+
+#### Use Case: Edit non-essential subject info
+
+##### Actors
+- Teacher
+
+
+##### Precondition
 
 - The teacher must be able to log in to the system.
 - The teacher has to be authorized to edit non-essential subject information.
 - The subject must already exist in the system.
 
-###### Normal
+
+##### Normal flow
 
 1. The teacher logs into their account.
 2. The teacher navigates to subject they wish to edit non-essential subject info.
@@ -192,21 +278,24 @@ start
 8. The system updates the subject information in the database.
 9. The system notifies the teacher that the update was successful.
 
-###### What can go wrong
+
+##### Alternative flows
 
 - If the teacher enters invalid information, the system displays an error message and the teacher will decide if they want to try again to edit the subject information or to end editing without changing anything.
 
-###### System state on completion
+
+##### System state on completion
 
 - Subject information are updated, the teacher is notified about the successful completion.
 - Non-valid subject information is rejected and the teacher is notified about the error and decide what they want todo the next.
 
+![edit non essential](img/edit-non-essential.png)
 ```plantuml
 @startuml
 start
 :The teacher logs into her/his account;
 :The teacher navigates to subject to edit;
-:The sysytem displays current subject info;
+:The system displays current subject info;
 :The teacher navigates to the edit non-essential info;
 repeat
     :The teacher modifies non-essential subject info;
@@ -217,7 +306,7 @@ repeat
         :The system notifies the teacher of success;
         stop
     else (invalid data)
-        :The sysytem displays error message;
+        :The system displays error message;
     endif
 repeat while (Try again to edit subject info?) is (yes)
 ->no;
@@ -226,15 +315,24 @@ stop
 @enduml
 ```
 
-##### Use Case: Edit subject
 
-###### Starting situation (Initial assumption)
+
+***
+
+
+
+#### Use Case: Edit subject
+
+##### Actors
+- SDO
+
+##### Precondition
 
 - The SDO must be able to log in to the system.
 - The SDO has to be authorized to edit subject information.
 - The subject must already exist in the system.
 
-###### Normal
+##### Normal flow
 
 1. The SDO logs into the system and accesses the subject management section.
 2. The SDO selects the subject to edit.
@@ -244,24 +342,34 @@ stop
 6. The system updates the subject information in the database.
 7. The system notifies the SDO that the update was successful.
 
-###### What can go wrong
+
+##### Alternative flows
 
 - If the SDO enters invalid information, the system displays an error message and the SDO will decide if they want to try again to edit the subject information or to end editing without changing anything.
 
-###### System state on completion
+##### System state on completion
 
 - Subject information is updated, the SDO is notified about the successful completion.
 - Non-valid subject information is rejected and the SDO is notified about the error and decide what they want to do the next.
 
-##### Use Case: Set co/pre-requisites
 
-###### Starting situation (Initial assumption)
+
+***
+
+
+
+#### Use Case: Set co/pre-requisites
+
+##### Actors
+- Teacher
+
+##### Precondition
 
 - The teacher must be able to log in to the system.
 - The teacher has to be authorized to set co/pre-requisites for the specific subject.
 - The subject must already exist in the system.
 
-###### Normal
+##### Normal flow
 
 1. The teacher logs into their account.
 2. The teacher navigates to the subject for which they want to set co/prerequisites.
@@ -272,25 +380,33 @@ stop
 7. The system updates the subject's co/prerequisites.
 8. The system notifies the teacher that the request was successfully sent.
 
-###### What can go wrong
+##### Alternative flows
 
 - If the teacher selects a subject that cannot logically be set as a co/prerequisite, the system displays an error message and the teacher will decide if they want to choose a different subject as a co/prerequisite.
 
-###### System state on completion
+##### System state on completion
 
 - The subject's co/prerequisites are set in the system and the teacher is notified about the successful submission of the request.
 - Non-valid subject's co/prerequisite is rejected and the teacher is notified about the error.
 
-##### Use Case: Add subject to study programme
 
-###### Starting situation (Initial assumption)
+***
+# Lukide
+
+
+#### Use Case: Add subject to study programme
+
+##### Actors
+- SDO
+
+##### Precondition
 
 - The SDO must be able to log in to the system.
 - The SDO has to be authorized to add subjects to study programmes.
 - The subject must already exist in the system.
 - The study programme must already exist in the system.
 
-###### Normal
+##### Normal flow
 
 1. The SDO logs into the system and accesses the study programme management section.
 2. The SDO selects the study programme to which they want to add a subject.
@@ -301,15 +417,16 @@ stop
 7. The system updates the study programme with the added subject.
 8. The system notifies the SDO that the subject has been successfully added to the study programme.
 
-###### What can go wrong
+##### Alternative flows
 
 - If the SDO selects a subject that is already part of the study programme, the system displays an error message, and the SDO will decide if they want to choose a different subject or cancel the operation.
 
-###### System state on completion
+##### System state on completion
 
 - The subject is successfully added to the study programme, and the SDO is notified about the successful completion.
 - Non-valid subjects are rejected, and the SDO is notified about the error.
 
+![add to programme](img/add-subject-to-programme.png)
 ```plantuml
 @startuml
 |SDO|
@@ -337,22 +454,21 @@ stop
 @enduml
 ```
 
-##### Use Case Description: View Subject Info
 
-###### Primary Actors:
+***
+# Bombonchik
+
+#### Use Case: View Subject Info
+
+##### Actors
 
 Student, Teacher, SDO
 
-###### Goal:
-
-- To allow users to view detailed information about a specific subject.
-
-###### Preconditions:
-
+##### Precondition
 - The user is logged into the system.
 - The system contains up-to-date information on subjects.
 
-###### Main Flow:
+##### Normal flow
 
 1. **User Login:** The user logs into the system and is authenticated.
 2. **Navigate to Subjects Overview:** The user navigates to the "Subjects Overview" section or tab within the system interface.
@@ -363,14 +479,17 @@ Student, Teacher, SDO
 7. **Select Subject:** The user selects a subject from the list to view more information.
 8. **Retrieve and Display Subject Info:** The system retrieves detailed information about the selected subject from the database and displays it. This information includes the subject name, description, credit hours, semester, faculty, department, list of teachers, and schedule.
 
-###### Postconditions:**
 
-- The user has accessed detailed information about the chosen subject.
-
-###### Alternative Flows:**
+##### Alternative Flows
 
 - **No Search Results:** If no subjects match the search criteria, the system displays a message indicating that no subjects were found. The user can adjust their search criteria and try again.
 
+
+##### System state on completion
+
+- The user has accessed detailed information about the chosen subject.
+
+![view info](img/view-subj-info.png)
 ```plantuml
 @startuml
 start
@@ -402,18 +521,23 @@ stop
 @enduml
 ```
 
-##### Use Case Description: Set Teachers for Subject
 
-###### Actor:
+***
+
+
+
+#### Use Case: Set Teachers for Subject
+
+##### Actors
 
 - SDO
 
-###### Preconditions:
+##### Precondition
 
 - The SDO must be logged into the system with sufficient privileges.
 - The subject and teacher information must be available in the system database.
 
-###### Main Flow:
+##### Normal flow
 
 1. The SDO navigates to the subject management page.
 2. The SDO selects the subject for which they want to assign teachers.
@@ -421,117 +545,26 @@ stop
 4. The SDO selects one or more teachers to assign to the subject and confirms the selection.
 5. The system updates the subject information with the assigned teacher(s) and displays a confirmation message.
 
-###### Postconditions:
-
-- The selected teacher(s) are assigned to the subject, and this information is updated in the system.
-
-###### Alternative Flows:
+##### Alternative flows
 
 - No Teachers Available: If there are no available teachers to assign, the system displays a message indicating this.
 
-##### Send request to modify subject info
+##### System state on completion
 
-This use case describes a process, by which the teacher can send a request to the study department office for modification of essential subject info.
+- The selected teacher(s) are assigned to the subject, and this information is updated in the system.
 
-###### Actors
 
-- Teacher
-- SDO
-
-###### Precondition
-The teachers has logged in into their SIS account and have opened the form for modifying essential subject info.
-
-###### Normal
-
-###### What can go wrong
-
-- The modification form contains some invalid values and the system notifies the teacher of a failed form submission.
-
-###### System state on completion
-
-- A new valid subject modification request is recorded and available for an SDO officer to accept, while notifying both the teacher and the SDO of the fact.
-- An invalid subject modification request is rejected and the teacher is notified of that fact.
-
-##### Activate/deactivate a subject
-
-This use case describes a process, by which the SDO can activate/deactivate a subject.
-
-###### Actors
-
-- SDO
+# Nalim
+***
+##### Use Case: Accept subject info modification request
 
 ###### Precondition
-The SDO has logged in to their SIS account and has opened the form for activating/deactivating a subject.
-
-###### Normal
-
-1. The SDO selects a subject by its shortcode and is provided with the option of activating/deactivating the subject.
-2. The SDO clicks on the activate/deactivate subject button.
-3. The application displays a verification window, to warn the SDO if they truly want to go proceed with the operation.
-4. The SDO confirms the operation.
-5. SIS verifies that the operation can be done, does it and notifies the SDO of it.
-
-###### What can go wrong
-
-- The subject activation/deactivation cannot be done(for example due to the subject being taught at the moment) and the SDO is notified of that.
-
-###### System state on completion
-
-- The subject is activated/deactivated and the SDO is notified of that.
-- The subject activation/deactivation wasn't able to proceed and the SDO is notified of that.
-
-##### Update subject info
-
-###### Starting situation (Initial assumption):
-
-- The respective subject is already created.
-- A teacher who wants to update the info must teach or guarantee this subject. - Within another Use case, there arises a need to update subject info.
-
-###### Normal interaction:
-
-1. The system receives the subject data that should be modified.
-2. The system updates the information.
-3. If there is a need to propagate these changes to another subjects (e.g. setting prerequisites), then their info is also modified.
-
-###### Alternative paths / What can go wrong:
-
-- If there arises a problem with prerequisite setting (e.g. a cycle is created), the operation should be canceled and the author should be notified via email.
-
-###### System state on completion:
-
-- The system contains the updated info.
-
-##### Accept subject creation request
-
-###### Starting situation (Initial assumption):
-
-- A teacher submits a subject creation request containing all the necessary information to the Study Department.
-
-###### Normal interaction:
-
-1. The SDO views the request.
-2. The SDO checks if the request is valid.
-3. The SDO approves the request.
-4. The subject is inserted into the system.
-5. The author of the request is notified of the result via email.
-
-###### Alternative paths / What can go wrong:
-
-- The SDO might not approve the request. In that case, the author is notified of the denial and the system remains unchanged.
-
-###### System state on completion:
-
-- The system contains the newly created subject.
-
-##### Accept subject info modification request
-
-###### Starting situation (Initial assumption):
 
 - A teacher fills in a form with modifications of one subject's information.
 - They submit the form as a request to the Study Department.
 - The subject must already exist (approved by the SD) and the teacher must guarantee or teach this subject.
 
-###### Normal interaction:
+###### Normal flow
 
 1. A SDO views the modifications of the information.
 2. A SDO approves the modification request.
@@ -539,7 +572,7 @@ The SDO has logged in to their SIS account and has opened the form for activatin
 4. The modifications are propagated to the system. (See the included Use case: "Update subject info").
 5. The teacher (author) is notified of the approvement via e-mail.
 
-###### Alternative paths / What can go wrong:
+###### Alternative flows
 
 - If the SDO declines the modifications, the subject info remains unchanged. The teacher (author) is notified of the denial. The request is archived.
 
@@ -548,6 +581,7 @@ The SDO has logged in to their SIS account and has opened the form for activatin
 - The subject info is modified (if the request was approved).
 - The subject info remains unchanged (if the request was declined).
 
+![accept request](img/accept-modification-request.png)
 ```plantuml
 @startuml
 
@@ -569,7 +603,68 @@ stop
 @enduml
 ```
 
+
+***
+
+
+
+#### Use Case: Accept subject creation request
+
+
+##### Actors
+- SDO
+
+##### Precondition
+
+- A teacher submits a subject creation request containing all the necessary information to the Study Department.
+
+##### Normal flow
+
+1. The SDO views the request.
+2. The SDO checks if the request is valid.
+3. The SDO approves the request.
+4. The subject is inserted into the system.
+5. The author of the request is notified of the result via email.
+
+###### Alternative flows
+
+- The SDO might not approve the request. In that case, the author is notified of the denial and the system remains unchanged.
+
+###### System state on completion
+
+- The system contains the newly created subject.
+
+
+
+***
+
+#### Use Case: Update subject info
+
+##### Precondition
+
+- The respective subject is already created.
+- A teacher who wants to update the info must teach or guarantee this subject. - Within another Use case, there arises a need to update subject info.
+
+##### Normal flow
+
+1. The system receives the subject data that should be modified.
+2. The system updates the information.
+3. If there is a need to propagate these changes to another subjects (e.g. setting prerequisites), then their info is also modified.
+
+##### Alternative flows
+
+- If there arises a problem with prerequisite setting (e.g. a cycle is created), the operation should be canceled and the author should be notified via email.
+
+##### System state on completion
+
+- The system contains the updated info.
+
+
+***
+
 ## Information model
+
+![](img/info-model.png)
 
 ```plantuml
 @startuml
@@ -612,10 +707,6 @@ Teacher -- Subject : teaches
 @enduml
 ```
 
-### Visitor
-
-Non-logged in visitor to the website.
-
 ### Person
 
 A natural person with personal information like name, email, phone etc.
@@ -635,3 +726,9 @@ A person working as a study department officer at the university.
 ### Subject
 
 An area of knowledge or study being taught at the university.
+
+### Subject creation request
+A request sent by a teacher to create a new subject
+
+### Subject modification request
+A request sent by a teacher to modify an existing subject
