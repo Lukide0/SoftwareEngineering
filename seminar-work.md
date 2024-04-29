@@ -288,6 +288,7 @@ The SDO has logged in to their SIS account and has opened the form for activatin
 - Subject information are updated, the teacher is notified about the successful completion.
 - Non-valid subject information is rejected and the teacher is notified about the error and decide what they want todo the next.
 
+
 ![edit non essential](img/edit-non-essential.png)
 ```plantuml
 @startuml
