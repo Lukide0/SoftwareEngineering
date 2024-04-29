@@ -269,8 +269,7 @@ stop
 4. The teacher adds/modifies the subject's co/prerequisites from a list of available subjects.
 5. The teacher sends the request to modify subject`s co/prerequisites.
 6. The system checks if selected subjects are valid co/prerequisites.
-7. The system updates the subject's co/prerequisites.
-8. The system notifies the teacher that the request was successfully sent.
+7. The system notifies the teacher that the request was successfully sent.
 
 ###### What can go wrong
 
