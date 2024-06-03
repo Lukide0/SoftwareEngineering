@@ -119,3 +119,60 @@ __Test conditions__:      1, 3, 4
 | #          | Action                                      | Expected result                                       | Result | Comment |
 | 1.         | The student clicks "View courses according to the degree plan" button | A special message is shown indicating no degree plan is chosen. |        |         |
 | 2.         | System displays common courses              | A list of common courses for all degree plans is displayed. |        |         |
+
+
+# Use Case: Un-enroll from a course
+### Test Conditions
+1. Click on the "Un-enroll from this course" button
+2. A warning containing information about the course is displayed and two buttons: Un-enroll and Cancel Un-enrollment.
+3. Click on the "Un-enroll" button
+4. Input the student password and the un-enrollment goes through
+
+## Test Case 1
+__ID:__                   1  
+__Title:__                The student successfully unenrolls from an enrolled course
+__Priority:__             High  
+__Preconditions:__        The student is enrolled in the course and is able to un-enroll. The student is logged in.  
+__Post conditions:__      The student is un-enrolled from the course, making him no longer enlisted in given course.  
+__Role:__                 Student.  
+__Test data__:            A set of enrolled courses.  
+__Test conditions__:      1, 2, 3, 4
+
+| Test Steps |                                             |                                                       |        |         |
+|------------|---------------------------------------------|-------------------------------------------------------| ------ | ------- |
+| #          | Action                                      | Expected result                                       | Result | Comment |
+| 1.         | The student clicks "Un-enroll from this course" button | A warning is displayed along with two buttons: Un-enroll and Cancel Un-enrollment. |        |         |
+| 2.         | The student clicks "Un-enroll" | The student is prompted with a password input |        |         |
+| 3.         | The student inputs their password and press enter | The student is successfully un-enrolled from the course |        |         |
+
+## Test Case 2
+__ID:__                   2
+__Title:__                The student can't un-enroll due to date being past the date of un-enrollment
+__Priority:__             Medium  
+__Preconditions:__        The student is enrolled in the course and it's paste the date of un-enrollment. The student is logged in.  
+__Post conditions:__      The student is displayed an error message indicating that it's past the date of un-enrollment.  
+__Role:__                 Student.  
+__Test data__:            A set of enrolled courses.  
+__Test conditions__:      1
+
+| Test Steps |                                             |                                                       |        |         |
+|------------|---------------------------------------------|-------------------------------------------------------| ------ | ------- |
+| #          | Action                                      | Expected result                                       | Result | Comment |
+| 1.         | The student clicks "Un-enroll from this course" button | An error message is displayed saying that it's paste the date of un-enrollment, providing a link to contact study department|        |         |
+
+## Test Case 3
+__ID:__                   3
+__Title:__                The student can't un-enroll due to incorrect password
+__Priority:__             Medium  
+__Preconditions:__        The student is enrolled in the course and can un-enroll. The student is logged in.  
+__Post conditions:__      The student gets logged out.  
+__Role:__                 Student.  
+__Test data__:            A set of enrolled courses.  
+__Test conditions__:      1, 2, 3, 4
+
+| Test Steps |                                             |                                                       |        |         |
+|------------|---------------------------------------------|-------------------------------------------------------| ------ | ------- |
+| #          | Action                                      | Expected result                                       | Result | Comment |
+| 1.         | The student clicks "Un-enroll from this course" button | A warning is displayed along with two buttons: Un-enroll and Cancel Un-enrollment. |        |         |
+| 2.         | The student clicks "Un-enroll" | The student is prompted with a password input |        |         |
+| 3.         | The student inputs incorrect password and presses enter 4 times| The student is logged out of their account. |        |         |
