@@ -160,7 +160,7 @@
 | --- | --------------------------------------------------------------------- | ---------------------------------------------------------------- | ------ | ------- |
 | 1.  | The student clicks "View courses according to the degree plan" button | A list of all courses according to the degree plan is displayed. |        |         |
 
-## Test Case 2
+### Test Case 2
 
 **ID:** 2  
 **Title:** The student views an empty list of courses becouse no degree plan is chosen  
@@ -178,7 +178,7 @@
 | 1.  | The student clicks "View courses according to the degree plan" button | A special message is shown indicating no degree plan is chosen. |        |         |
 | 2.  | System displays no courses                                            | The course list is empty.                                       |        |         |
 
-## Test Case 3
+### Test Case 3
 
 **ID:** 3  
 **Title:** The student views common courses becouse no degree plan is chosen  
@@ -196,7 +196,7 @@
 | 1.  | The student clicks "View courses according to the degree plan" button | A special message is shown indicating no degree plan is chosen. |        |         |
 | 2.  | System displays common courses                                        | A list of common courses for all degree plans is displayed.     |        |         |
 
-# Use Case: Un-enroll from a course
+## Use Case: Un-enroll from a course
 
 ### Test Conditions
 
@@ -205,7 +205,7 @@
 3. Click on the "Un-enroll" button
 4. Input the student password and the un-enrollment goes through
 
-## Test Case 1
+### Test Case 1
 
 **ID:** 1  
 **Title:** The student successfully unenrolls from an enrolled course
@@ -224,7 +224,7 @@
 | 2.  | The student clicks "Un-enroll"                         | The student is prompted with a password input                                      |        |         |
 | 3.  | The student inputs their password and press enter      | The student is successfully un-enrolled from the course                            |        |         |
 
-## Test Case 2
+### Test Case 2
 
 **ID:** 2
 **Title:** The student can't un-enroll due to date being past the date of un-enrollment
@@ -241,7 +241,7 @@
 | --- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- | ------ | ------- |
 | 1.  | The student clicks "Un-enroll from this course" button | An error message is displayed saying that it's paste the date of un-enrollment, providing a link to contact study department |        |         |
 
-## Test Case 3
+### Test Case 3
 
 **ID:** 3
 **Title:** The student can't un-enroll due to incorrect password
